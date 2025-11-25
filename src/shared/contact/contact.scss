@@ -1,0 +1,215 @@
+/* Variáveis (Identidade do Hero) */
+$gold: #c5a059;
+$white: #ffffff;
+$font-serif: 'Cormorant Garamond', serif; /* Fonte do Hero */
+$font-sans: 'Montserrat', sans-serif;
+
+.contact-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center;
+  padding: 120px 20px 80px;  /* Espaço para não colar nas bordas */
+
+  /* Imagem de Fundo Fixa (Parallax) */
+  background: url('/time.JPG') no-repeat center top;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow: hidden;
+
+  /* Overlay Degradê: Escuro nas laterais, leve no centro */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(15, 23, 42, 0.9) 0%,   /* Bem escuro na esquerda (texto) */
+      rgba(15, 23, 42, 0.7) 50%,
+      rgba(15, 23, 42, 0.9) 100%  /* Bem escuro na direita (form) */
+    );
+    z-index: 1;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas iguais */
+    gap: 6rem; /* Espaço amplo entre texto e form */
+    align-items: center;
+  }
+
+  /* --- LADO ESQUERDO: TEXTO HERO --- */
+  .info-side {
+    .hero-title {
+      font-family: $font-serif;
+      font-size: 4rem; /* Tamanho Hero */
+      color: $white;
+      font-weight: 400;
+      line-height: 1.1;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+
+      .italic-gold {
+        color: $gold;
+        font-style: italic; /* Toque elegante do Hero */
+        font-family: $font-serif;
+      }
+    }
+
+    .gold-line {
+      width: 80px;
+      height: 1px;
+      background: $gold;
+      margin: 2rem 0;
+    }
+
+    .hero-subtitle {
+      font-family: $font-sans;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 3rem;
+      max-width: 90%;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        mat-icon {
+          color: $gold;
+          font-size: 1.8rem;
+          width: 1.8rem;
+          height: 1.8rem;
+        }
+
+        span {
+          font-family: $font-sans;
+          color: $white;
+          font-size: 1rem;
+          letter-spacing: 0.5px;
+        }
+      }
+    }
+  }
+
+  /* --- LADO DIREITO: FORMULÁRIO FLUTUANTE --- */
+  .form-side {
+    /* Sem background, sem bordas. Apenas inputs flutuando. */
+    padding: 1rem;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem; /* Espaçamento grande para elegância */
+    }
+
+    .input-wrapper {
+      position: relative;
+
+      label {
+        display: block;
+        font-family: $font-sans;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: $gold;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      input, textarea {
+        width: 100%;
+        background: transparent; /* Fundo transparente */
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Linha sutil */
+        padding: 10px 0;
+        color: $white;
+        font-family: $font-serif; /* Fonte Serifada no input fica muito chique */
+        font-size: 1.5rem; /* Input com letra grande */
+        outline: none;
+        transition: border-color 0.4s ease;
+        resize: none;
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.2);
+          font-family: $font-sans;
+          font-size: 1rem;
+          font-weight: 300;
+        }
+
+        &:focus {
+          border-bottom-color: $gold; /* Linha fica dourada no foco */
+        }
+      }
+    }
+
+    /* Botão Estilo Outline/Hero */
+    .btn-hero {
+      margin-top: 1rem;
+      background: transparent;
+      border: 1px solid $gold;
+      color: $gold;
+      padding: 1rem 3rem;
+      font-family: $font-sans;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      align-self: flex-start;
+
+      &:hover {
+        background: $gold;
+        color: #0f172a; /* Cor escura do texto no hover */
+        box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+      }
+    }
+  }
+
+  /* --- RESPONSIVIDADE --- */
+  @media (max-width: 992px) {
+    padding-top: 100px;
+    height: auto; /* Remove altura fixa no mobile */
+    min-height: auto;
+
+    .container {
+      grid-template-columns: 1fr; /* Uma coluna */
+      gap: 4rem;
+    }
+
+    .info-side {
+      text-align: center;
+
+      .gold-line { margin: 2rem auto; }
+      .hero-subtitle { margin: 0 auto 3rem auto; }
+
+      .contact-list {
+        align-items: center; /* Centraliza itens */
+      }
+
+      .hero-title { font-size: 3rem; }
+    }
+
+    .form-side {
+      padding-bottom: 3rem;
+
+      .input-wrapper input,
+      .input-wrapper textarea {
+        font-size: 1.2rem; /* Menor no mobile */
+      }
+    }
+  }
+}

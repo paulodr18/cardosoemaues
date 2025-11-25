@@ -1,0 +1,29 @@
+<mat-toolbar color="primary" class="header-toolbar" [class.blue-theme]="isBlueTheme">
+
+  <!-- Adicionei cursor pointer na logo -->
+  <div class="logo" style="cursor: pointer;" routerLink="/">
+    <img src="/assets/00.png" alt="Logo Cardoso & Maués" />
+  </div>  
+
+  <span class="spacer"></span>
+
+  <!-- Menu Desktop -->
+  <nav class="menu-desktop">
+    <a *ngFor="let item of menuItems" [href]="item.link" mat-button>{{ item.label }}</a>
+    
+    <a mat-button class="partner-btn" (click)="openPartnerModal()">
+      Seja um Parceiro
+    </a>
+  </nav>
+
+  <!-- Menu Mobile Button -->
+  <button mat-icon-button class="menu-mobile-button" (click)="toggleMobileMenu()">
+    <mat-icon>{{ isMobileMenuOpen ? 'close' : 'menu' }}</mat-icon>
+  </button>
+</mat-toolbar>
+
+<!-- Menu Mobile -->
+<div class="menu-mobile" *ngIf="isMobileMenuOpen">
+  <a *ngFor="let item of menuItems" [href]="item.link" (click)="toggleMobileMenu()">{{ item.label }}</a>
+  <a class="partner-btn-mobile" (click)="openPartnerModal()">Seja um Parceiro</a>
+</div>

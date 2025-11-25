@@ -1,0 +1,73 @@
+<!-- CONTÊINER GERAL -->
+<div class="chat-widget">
+
+  <!-- 1. BOTÃO FLUTUANTE (Aparece quando fechado) -->
+  <div class="chat-invite" *ngIf="!isOpen" (click)="toggleChat()">
+    
+    <!-- Balão de Texto (Tooltip elegante) -->
+    <div class="speech-bubble">
+      <span>Consulte seu Processo</span>
+    </div>
+
+    <!-- O Avatar (Sua Imagem) -->
+    <div class="assistant-avatar">
+      <div class="img-container">
+        <img src="/chatbot.png" alt="Assistente Virtual">
+      </div>
+      <!-- Status Online (Pulsante) -->
+      <div class="status-online"></div>
+    </div>
+  </div>
+
+  <!-- 2. JANELA DO CHAT (Aparece quando aberto) -->
+  <div class="chat-window" [class.open]="isOpen">
+    
+    <!-- Cabeçalho Premium -->
+    <div class="chat-header">
+      <div class="header-profile">
+        <div class="avatar-small">
+          <img src="/chatbot.png" alt="Avatar">
+        </div>
+        <div class="header-text">
+          <h3>Cardoso & Maués</h3>
+          <div class="status-indicator">
+            <span class="dot"></span>
+            <span class="text">Online Agora</span>
+          </div>
+        </div>
+      </div>
+      <button class="close-btn" (click)="toggleChat()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Área de Mensagens -->
+    <div class="messages-area" #messagesContainer>
+      <div class="date-divider"><span>Hoje</span></div>
+
+      <div *ngFor="let msg of messages" 
+           class="message-row" 
+           [ngClass]="msg.sender">
+        
+        <div class="bubble">
+          <p [innerHTML]="msg.text"></p>
+          <span class="time">{{ msg.time }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Área de Input -->
+    <div class="input-area">
+      <input 
+        type="text" 
+        [(ngModel)]="newMessage" 
+        (keydown.enter)="sendMessage()"
+        placeholder="Digite sua mensagem..."
+      >
+      <button class="send-btn" (click)="sendMessage()" [disabled]="!newMessage.trim()">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+
+  </div>
+</div>

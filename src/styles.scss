@@ -1,0 +1,121 @@
+
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* =========================================
+   VARIÁVEIS GLOBAIS
+   ========================================= */
+:root {
+  --font-title: 'Cinzel', serif;
+  --font-body: 'Montserrat', sans-serif;
+
+  --color-navy: #0f172a;
+  --color-gold: #c5a059;
+  --color-white: #ffffff;
+}
+
+/* =========================================
+   RESET E PADRONIZAÇÃO DE FONTES
+   ========================================= */
+
+/* 1. Aplica Montserrat no corpo todo por padrão */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font-body) !important;
+  -webkit-font-smoothing: antialiased; /* Deixa a fonte mais nítida */
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-navy);
+}
+
+/* 2. Títulos sempre serão Cinzel (Autoridade) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title) !important;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px; /* Deixa o título mais compacto e elegante */
+}
+
+/* 3. Textos corridos (Leitura) */
+p, span, li, a, div {
+  font-family: var(--font-body);
+  line-height: 1.6; /* Espaçamento entre linhas para leitura confortável */
+}
+
+/* =========================================
+   OVERRIDES DO ANGULAR MATERIAL
+   (Força os componentes do Angular a usarem nossas fontes)
+   ========================================= */
+
+/* Botões */
+.mdc-button, .mat-mdc-button, .mat-mdc-raised-button {
+  font-family: var(--font-body) !important;
+  text-transform: uppercase;
+  letter-spacing: 1px; /* Espaçamento premium em botões */
+  font-weight: 600 !important;
+}
+
+/* Inputs e Formulários */
+.mat-mdc-form-field, .mdc-text-field__input {
+  font-family: var(--font-body) !important;
+}
+
+/* Labels dos Inputs */
+.mdc-floating-label {
+  font-family: var(--font-body) !important;
+  letter-spacing: 0.5px;
+}
+
+/* Tooltips e Snackbars (Mensagens) */
+.mdc-snackbar__label, .mat-mdc-tooltip {
+  font-family: var(--font-body) !important;
+}
+
+/* Dialogs (Modais) */
+.mat-mdc-dialog-title {
+  font-family: var(--font-title) !important; /* Título do modal em Cinzel */
+}
+
+/* =========================================
+   CLASSES UTILITÁRIAS (Opcional)
+   ========================================= */
+.text-gold { color: var(--color-gold); }
+.text-navy { color: var(--color-navy); }
+.text-uppercase { text-transform: uppercase; letter-spacing: 1px; }

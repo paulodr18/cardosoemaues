@@ -1,0 +1,143 @@
+/* Variáveis */
+$gold: #c5a059;
+$dark: #0f172a;
+$font-serif: 'Cinzel', serif;
+$font-sans: 'Montserrat', sans-serif;
+
+.modal-container {
+  padding: 1.5rem;
+  color: $dark;
+  font-family: $font-sans;
+  background: #fff;
+  position: relative;
+  /* Scroll se a tela for pequena */
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+
+  h2 {
+    font-family: $font-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: $dark;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    .ampersand {
+      color: $gold;
+      font-weight: 400;
+    }
+
+    .gold-text {
+      color: $gold;
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      text-transform: capitalize;
+    }
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: rgba(15, 23, 42, 0.7);
+    margin-top: 0.5rem;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    color: #999;
+    
+    &:hover { color: $dark; }
+  }
+}
+
+/* Estilização de Layout */
+.full-width {
+  width: 100%;
+}
+
+.row {
+  margin-bottom: 0.2rem;
+}
+
+.double-col {
+  display: flex;
+  gap: 1rem;
+}
+
+/* --- OVERRIDES DO MATERIAL DESIGN (Para ficar Dourado) --- */
+
+/* Cor da borda padrão */
+::ng-deep .custom-field .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+::ng-deep .custom-field .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+::ng-deep .custom-field .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+  border-color: rgba(15, 23, 42, 0.2);
+}
+
+/* Cor da borda quando FOCADO (Dourado) */
+::ng-deep .custom-field
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
+  .mdc-notched-outline__leading,
+::ng-deep .custom-field
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
+  .mdc-notched-outline__notch,
+::ng-deep .custom-field
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
+  .mdc-notched-outline__trailing {
+  border-color: $gold !important;
+  border-width: 2px;
+}
+
+/* Cor do Label quando flutua */
+::ng-deep .custom-field .mdc-floating-label--float-above {
+  color: $gold !important;
+  font-weight: 500;
+}
+
+/* Botões */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+
+  .btn-cancel {
+    color: #64748b;
+    font-family: $font-sans;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .btn-submit {
+    background-color: $gold;
+    color: #fff;
+    font-family: $font-sans;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0 2rem;
+    height: 45px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
+
+    &:hover {
+      background-color: darken($gold, 10%);
+      box-shadow: 0 6px 15px rgba(197, 160, 89, 0.5);
+    }
+  }
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .modal-container { padding: 1rem; }
+  .double-col { flex-direction: column; gap: 0; }
+  .modal-header h2 { font-size: 1.5rem; }
+}

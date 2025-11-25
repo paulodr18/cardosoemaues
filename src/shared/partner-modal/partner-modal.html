@@ -1,0 +1,86 @@
+<div class="modal-container">
+  
+  <!-- TELA 1: FORMULÁRIO (Aparece se NÃO for sucesso) -->
+  <ng-container *ngIf="!isSuccess">
+    <!-- Cabeçalho -->
+    <div class="modal-header">
+      <h2>Parceria <span class="ampersand">&</span> <span class="gold-text">Cooperação</span></h2>
+      <p>Una-se à nossa rede de excelência jurídica.</p>
+      <button mat-icon-button class="close-btn" (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Formulário com ReactiveForms -->
+    <form [formGroup]="partnerForm" class="partner-form">
+      <div class="row">
+        <mat-form-field appearance="outline" class="full-width custom-field">
+          <mat-label>Nome Completo / Escritório</mat-label>
+          <input matInput formControlName="name" placeholder="Ex: Dr. João Silva" required>
+          <mat-error *ngIf="partnerForm.get('name')?.hasError('required')">Campo obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row double-col">
+        <mat-form-field appearance="outline" class="custom-field">
+          <mat-label>E-mail Corporativo</mat-label>
+          <input matInput formControlName="email" type="email" required>
+          <mat-error *ngIf="partnerForm.get('email')?.hasError('email')">E-mail inválido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="custom-field">
+          <mat-label>WhatsApp / Telefone</mat-label>
+          <!-- ADICIONADO: Evento (input) para máscara -->
+          <input matInput 
+                 formControlName="phone" 
+                 type="tel" 
+                 (input)="formatPhone($event)" 
+                 placeholder="(00) 00000-0000"
+                 required>
+          <mat-error *ngIf="partnerForm.get('phone')?.hasError('required')">Obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="full-width custom-field">
+          <mat-label>Perfil de Parceria</mat-label>
+          <mat-select formControlName="profile" required>
+            <mat-option value="correspondente">Advogado(a) Correspondente</mat-option>
+            <mat-option value="contador">Contabilidade / Perícia</mat-option>
+            <mat-option value="consultoria">Consultoria Empresarial</mat-option>
+            <mat-option value="outro">Outro</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="full-width custom-field">
+          <mat-label>Mensagem ou Proposta</mat-label>
+          <textarea matInput formControlName="message" rows="4" placeholder="Descreva brevemente sua intenção..."></textarea>
+        </mat-form-field>
+      </div>
+
+      <!-- Ações -->
+      <div class="modal-actions">
+        <button mat-button (click)="close()" type="button" class="btn-cancel">Cancelar</button>
+        <!-- ADICIONADO: type="button" e (click)="submitForm()" -->
+        <button mat-raised-button class="btn-submit" type="button" (click)="submitForm()">Enviar Proposta</button>
+      </div>
+    </form>
+  </ng-container>
+
+  <!-- TELA 2: MENSAGEM DE SUCESSO (Aparece se FOR sucesso) -->
+  <div class="success-message" *ngIf="isSuccess">
+    <div class="icon-circle">
+      <mat-icon>check</mat-icon>
+    </div>
+    <h3>Proposta Enviada!</h3>
+    <p>Agradecemos o seu interesse em ser nosso parceiro.</p>
+    <p class="sub-text">Nossa equipe analisará seu perfil e entrará em contato em breve.</p>
+    
+    <button mat-stroked-button class="btn-close-success" (click)="close()">
+      Fechar
+    </button>
+  </div>
+
+</div>

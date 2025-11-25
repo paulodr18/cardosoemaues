@@ -1,0 +1,245 @@
+/* ================================
+   Variáveis de Estilo
+================================ */
+$color-gold: #c5a059;
+$color-white: #fdfdfd;
+$font-sans: 'Montserrat', sans-serif;
+$header-height: 70px;
+
+.header-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Garante distribuição correta */
+  padding: 0 2rem;
+  height: $header-height;
+
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  transition: background-color 0.4s ease;
+
+  font-family: $font-sans;
+  color: $color-white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-sizing: border-box; /* Importante para o padding não estourar a largura */
+
+  /* --- TEMA AZUL --- */
+  &.blue-theme {
+    background: #0a2157;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  /* --- LOGO DESKTOP --- */
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Tamanhos Desktop */
+    width: 400px; 
+    height: 100px;
+    
+    position: relative;
+    /* Centralização "Hack" do desktop (mantido, mas será resetado no mobile) */
+    margin-left: -120px; 
+    
+    opacity: 0;
+    transform: translateX(-100px) scale(0.9);
+    animation: logoEntrance 1.6s ease-out forwards;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+
+      -webkit-mask-image: url('../../assets/01.png');
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      -webkit-mask-size: contain;
+      mask-image: url('../../assets/01.png');
+
+      background: linear-gradient(to right, #ffffff 0%, #e0e0e0 50%, #ffffff 100%);
+      background-size: 300% 300%;
+      animation: metallicFlow 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+      transition: transform 0.6s ease, filter 0.6s ease;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 20px rgba(197, 160, 89, 0.5));
+      img { animation: metallicFlowFast 3s linear infinite; }
+    }
+  }
+
+  .spacer { flex: 1; }
+
+  /* --- MENU DESKTOP --- */
+  .menu-desktop {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+    a {
+      color: $color-white;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      position: relative;
+      transition: color 0.3s ease;
+      text-decoration: none;
+
+      &:not(.partner-btn):hover { color: $color-gold; }
+
+      &:not(.partner-btn)::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: $color-gold;
+        transition: width 0.4s ease;
+      }
+      &:not(.partner-btn):hover::after { width: 100%; }
+    }
+
+    .partner-btn {
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      padding-left: 2rem;
+      margin-left: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: all 0.4s ease;
+
+      &:hover {
+        color: $color-gold;
+        text-shadow: 0 0 12px rgba(197, 160, 89, 0.6);
+        border-left-color: $color-gold;
+      }
+    }
+  }
+
+  /* Botão Mobile (Inicialmente oculto) */
+  .menu-mobile-button {
+    display: none; 
+    color: $color-white;
+    background: transparent;
+    border: none;
+    z-index: 1001; /* Fica acima de tudo */
+    
+    &:hover { color: $color-gold; }
+    
+    mat-icon {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes logoEntrance {
+  0% { opacity: 0; transform: translateX(-100px) scale(0.9); filter: blur(8px); }
+  100% { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+}
+@keyframes metallicFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes metallicFlowFast { 0% { background-position: -100% 50%; } 50% { background-position: 200% 50%; } 100% { background-position: -100% 50%; } }
+
+/* ================================
+   RESPONSIVIDADE (Correções)
+================================ */
+
+/* Tablet e Mobile (Abaixo de 992px) */
+@media (max-width: 992px) {
+  .header-toolbar {
+    padding: 0 1.5rem; /* Reduz padding lateral */
+    
+    .menu-desktop { display: none; }
+    .menu-mobile-button { display: inline-flex; }
+    .spacer { display: none; } /* Remove o spacer para controlar alinhamento manual */
+
+    /* --- CORREÇÃO DA LOGO NO MOBILE --- */
+    .logo {
+      width: 180px; /* Reduz muito o tamanho */
+      height: 60px;
+      margin-left: 0; /* Remove a margem negativa que quebrava o layout */
+      
+      /* Reseta animação de entrada para não causar glitch no mobile */
+      transform: none; 
+      opacity: 1;
+      animation: none;
+      justify-content: flex-start; /* Alinha à esquerda */
+    }
+  }
+
+  /* Menu Dropdown Mobile */
+ /* Substitua o bloco .menu-mobile existente por este */
+.menu-mobile {
+  display: flex;
+  flex-direction: column;
+  
+  /* MUDANÇA: Fundo Navy Profundo (Quase preto) */
+  background: #0f172a; 
+  
+  position: fixed;
+  top: $header-height;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - #{$header-height});
+  overflow-y: auto;
+  z-index: 998;
+  padding: 2rem 0;
+  
+  /* Borda superior dourada */
+  border-top: 1px solid #c5a059;
+
+  a {
+    padding: 1.5rem 2rem;
+    color: #ffffff;
+    font-family: $font-sans;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    
+    /* Linha separadora sutil dourada */
+    border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+    
+    font-size: 1.1rem;
+    transition: all 0.3s;
+
+    &:hover {
+      background: rgba(197, 160, 89, 0.1); /* Fundo dourado leve */
+      color: #c5a059; /* Texto Dourado */
+      padding-left: 2.5rem; /* Leve movimento para direita */
+    }
+  }
+
+  .partner-btn-mobile {
+    color: #c5a059;
+    font-weight: 700;
+    border-bottom: none;
+    margin-top: 20px;
+    font-size: 1.2rem;
+  }
+}
+}
+
+/* Telas Pequenas (Celulares < 480px) */
+@media (max-width: 480px) {
+  .header-toolbar { 
+    padding: 0 1rem; 
+    
+    /* Reduz ainda mais a logo para caber o botão */
+    .logo { 
+      width: 140px; 
+      height: 50px;
+    }
+  }
+}

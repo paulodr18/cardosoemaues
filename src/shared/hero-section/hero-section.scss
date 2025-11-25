@@ -1,0 +1,200 @@
+/* ================================
+   Variáveis de Estilo
+================================ */
+$font-serif: 'Cormorant Garamond', serif;
+$font-sans: 'Montserrat', sans-serif;
+
+$color-gold: #c5a059;
+$color-white: #fdfdfd; /* Branco levemente off */
+
+/* ================================
+   Hero Section
+================================ */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  /* Background Video */
+  .background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -3;
+    filter: brightness(0.65) contrast(1.1);
+  }
+
+  /* Overlay */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 30, 0.4);
+    z-index: -2;
+  }
+
+  /* Conteúdo */
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    padding: 0 20px;
+    animation: fadeIn 2s ease;
+
+    .hero-text {
+      h1 {
+        font-family: $font-serif;
+        font-size: 4.5rem;
+        font-weight: 400;
+        color: $color-white;
+        margin: 0;
+        line-height: 1.1;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+
+        .ampersand {
+          font-family: serif;
+          font-style: italic;
+          color: $color-gold;
+          font-weight: 300;
+          font-size: 4rem;
+          margin: 0 10px;
+        }
+      }
+
+      /* Divider */
+      .divider {
+        width: 60px;
+        height: 1px;
+        background-color: $color-gold;
+        margin: 2rem auto;
+        opacity: 0.8;
+      }
+
+      /* Subtitle */
+      .subtitle {
+        font-family: $font-sans;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        font-weight: 300;
+        margin-bottom: 3rem;
+      }
+
+      /* Botão Outline */
+      .btn-outline {
+        display: inline-block;
+        padding: 0.9rem 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: $color-white;
+        font-family: $font-sans;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-decoration: none;
+        transition: all 0.5s ease;
+        background: transparent;
+
+        &:hover {
+          border-color: $color-gold;
+          color: $color-gold;
+          background: rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+
+    /* Redes Sociais */
+    .social-media {
+      margin-top: 5rem;
+      display: flex;
+      justify-content: center;
+
+      .social-simple {
+        display: flex;
+        gap: 2rem;
+
+        .social-link {
+          width: 24px;
+          height: 24px;
+          background-color: rgba(255, 255, 255, 0.7);
+          mask-size: contain;
+          mask-repeat: no-repeat;
+          mask-position: center;
+          -webkit-mask-size: contain;
+          -webkit-mask-repeat: no-repeat;
+          -webkit-mask-position: center;
+          transition: all 0.3s;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $color-gold;
+            transform: translateY(-3px);
+          }
+        }
+
+        .instagram {
+          -webkit-mask-image: url('/midias-sociais/instagram.png');
+          mask-image: url('/midias-sociais/instagram.png');
+        }
+        .facebook {
+          -webkit-mask-image: url('/midias-sociais/facebook.png');
+          mask-image: url('/midias-sociais/facebook.png');
+        }
+        .linkedin {
+          -webkit-mask-image: url('/midias-sociais/linkedin.png');
+          mask-image: url('/midias-sociais/linkedin.png');
+        }
+        .whatsapp {
+          -webkit-mask-image: url('/midias-sociais/whatsapp.png');
+          mask-image: url('/midias-sociais/whatsapp.png');
+        }
+      }
+    }
+  }
+}
+
+/* ================================
+   Responsividade
+================================ */
+@media (max-width: 768px) {
+  .hero-section .hero-content .hero-text {
+    h1 {
+      font-size: 2.8rem;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+    }
+
+    .divider {
+      margin: 1.5rem auto;
+    }
+  }
+}
+
+/* ================================
+   Animação
+================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
