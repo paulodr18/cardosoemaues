@@ -6,6 +6,7 @@ import { Service } from "../shared/service/service";
 import { Footer } from "../shared/footer/footer";
 import { Contact } from "../shared/contact/contact";
 import { HeroSectionComponent } from "../shared/hero-section/hero-section";
+import { SituacoesComponent } from "../shared/situacoes/situacoes";
 import { Parceria } from "../shared/parceria/parceria";
 
 @Component({
@@ -19,6 +20,7 @@ import { Parceria } from "../shared/parceria/parceria";
     Footer,
     Contact,
     HeroSectionComponent,
+    SituacoesComponent,
     Parceria
 ],
   templateUrl: './app.html',

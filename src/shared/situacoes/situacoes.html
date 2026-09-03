@@ -1,0 +1,30 @@
+<section class="situacoes-section" id="situacoes">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="pre-title">Seus Direitos</span>
+      <h2 class="title">Você se identifica com alguma destas situações?</h2>
+      <div class="divider"></div>
+      <p class="lead">
+        Muita gente passa por isso sem saber que a lei prevê uma proteção.
+        Veja se a sua situação está aqui — e fale com quem pode orientar.
+      </p>
+    </div>
+
+    <div class="situacoes-grid">
+      <article class="situacao-card" *ngFor="let s of situacoes">
+        <div class="icon-box"><mat-icon>{{ s.icone }}</mat-icon></div>
+        <h3 class="pergunta">{{ s.pergunta }}</h3>
+        <p class="direito">{{ s.direito }}</p>
+        <a class="cta" [href]="linkWhatsapp(s)" target="_blank" rel="noopener">
+          Falar com um advogado <mat-icon>arrow_forward</mat-icon>
+        </a>
+        <div class="hover-line"></div>
+      </article>
+    </div>
+
+    <p class="aviso">
+      Conteúdo informativo. Cada situação depende de análise individual dos documentos e do histórico.
+    </p>
+  </div>
+</section>

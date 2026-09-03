@@ -18,8 +18,9 @@ import { PartnerModalComponent } from '../partner-modal/partner-modal';
 export class Navbar implements OnInit {
   menuItems = [
     { label: 'Início', link: '/' }, // Dica: use '/' para home se estiver usando roteamento
-    { label: 'Sobre', link: '#sobre' },
+    { label: 'Seus Direitos', link: '#situacoes' },
     { label: 'Serviços', link: '#servicos' },
+    { label: 'Sobre', link: '#sobre' },
     { label: 'Contato', link: '#contato' },
   ];
 

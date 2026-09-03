@@ -1,18 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
-import { PartnerModal } from './partner-modal';
+import { PartnerModalComponent } from './partner-modal';
 
-describe('PartnerModal', () => {
-  let component: PartnerModal;
-  let fixture: ComponentFixture<PartnerModal>;
+describe('PartnerModalComponent', () => {
+  let component: PartnerModalComponent;
+  let fixture: ComponentFixture<PartnerModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PartnerModal]
+      imports: [PartnerModalComponent],
+      providers: [
+        provideZonelessChangeDetection(),
+        { provide: MatDialogRef, useValue: { close: () => {} } }
+      ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PartnerModal);
+    fixture = TestBed.createComponent(PartnerModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

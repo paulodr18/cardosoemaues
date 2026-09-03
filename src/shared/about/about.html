@@ -8,14 +8,8 @@
       <div class="divider"></div>
     </div>
 
-    <!-- PERFIL 1: Dra. Larissa (Foto Esquerda / Texto Direita) -->
+    <!-- PERFIL 1: Dra. Larissa -->
     <div class="profile-row">
-      <div class="image-col">
-        <div class="photo-frame">
-          <div class="photo img-larissa"></div>
-          <div class="frame-border"></div>
-        </div>
-      </div>
 
       <div class="text-col">
         <div class="name-badge">
@@ -31,19 +25,12 @@
           <li><mat-icon>check_circle</mat-icon> Benefícios por Incapacidade</li>
         </ul>
         <!-- Botão discreto -->
-        <a href="https://wa.me/55SEUNUMERO" target="_blank" class="link-gold">Agendar Consulta &rarr;</a>
+        <a [href]="linkWhatsapp(whatsapp.geral)" target="_blank" rel="noopener" class="link-gold">Agendar Consulta &rarr;</a>
       </div>
     </div>
 
-    <!-- PERFIL 2: Dr. Abelardo (Texto Esquerda / Foto Direita) -->
-    <!-- A classe 'reverse' inverte a ordem -->
-    <div class="profile-row reverse">
-      <div class="image-col">
-        <div class="photo-frame">
-          <div class="photo img-abelardo"></div>
-          <div class="frame-border"></div>
-        </div>
-      </div>
+    <!-- PERFIL 2: Dr. Abelardo -->
+    <div class="profile-row">
 
       <div class="text-col">
         <div class="name-badge">
@@ -58,7 +45,7 @@
           <li><mat-icon>check_circle</mat-icon> Acidentes de Trabalho</li>
           <li><mat-icon>check_circle</mat-icon> Compliance Trabalhista</li>
         </ul>
-        <a href="https://wa.me/55SEUNUMERO" target="_blank" class="link-gold">Falar com Dr. Abelardo &rarr;</a>
+        <a [href]="linkWhatsapp(whatsapp.trabalhista)" target="_blank" rel="noopener" class="link-gold">Falar com Dr. Abelardo &rarr;</a>
       </div>
     </div>
 

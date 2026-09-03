@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 import { Parceria } from './parceria';
 
@@ -8,7 +9,8 @@ describe('Parceria', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Parceria]
+      imports: [Parceria],
+      providers: [provideZonelessChangeDetection()]
     })
     .compileComponents();
 

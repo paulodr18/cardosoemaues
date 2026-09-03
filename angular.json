@@ -37,6 +37,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -55,6 +61,17 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "ec2": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ec2.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -67,6 +84,9 @@
             },
             "development": {
               "buildTarget": "landing-page:build:development"
+            },
+            "ec2": {
+              "buildTarget": "landing-page:build:ec2"
             }
           },
           "defaultConfiguration": "development"

@@ -2,6 +2,12 @@
   <!-- Overlay Degradê para leitura -->
   <div class="overlay"></div>
 
+  <!-- Legenda da foto de fundo: identifica que é a equipe do escritório -->
+  <div class="foto-legenda" aria-label="Foto de fundo: equipe Cardoso & Maués">
+    <mat-icon>groups</mat-icon>
+    <span><strong>Nossa equipe</strong> Cardoso &amp; Maués</span>
+  </div>
+
   <div class="container">
     
     <!-- Lado Esquerdo: Texto Grande (Estilo Hero) -->
@@ -17,10 +23,14 @@
       </p>
 
       <div class="contact-list">
-        <div class="contact-item">
+        <a class="contact-item" [href]="linkWhatsapp(whatsapp.geral)" target="_blank" rel="noopener">
           <mat-icon>phone</mat-icon>
-          <span>(91) 992996-2708</span>
-        </div>
+          <span><small>Atendimento geral</small>{{ formatarTelefone(whatsapp.geral) }}</span>
+        </a>
+        <a class="contact-item" [href]="linkWhatsapp(whatsapp.trabalhista)" target="_blank" rel="noopener">
+          <mat-icon>phone</mat-icon>
+          <span><small>Trabalhista</small>{{ formatarTelefone(whatsapp.trabalhista) }}</span>
+        </a>
         <div class="contact-item">
           <mat-icon>email</mat-icon>
           <span>contato@cardosoemaues.com.br</span>

@@ -1,0 +1,161 @@
+/* Variáveis (mesmas das demais seções) */
+$navy: #0f172a;
+$gold: #c5a059;
+$white: #ffffff;
+$font-title: 'Cinzel', serif;
+$font-serif: 'Cormorant Garamond', serif;
+$font-body: 'Montserrat', sans-serif;
+
+.situacoes-section {
+  padding: 7rem 2rem;
+  background-color: rgba(229, 229, 236, 0.438);
+  font-family: $font-body;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* --- CABEÇALHO (padrão das outras seções) --- */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+
+  .pre-title {
+    color: $gold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-family: $font-title;
+    color: $navy;
+    font-size: 2.6rem;
+    margin: 0 auto;
+    max-width: 900px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .divider {
+    width: 60px; height: 3px; background: $gold;
+    margin: 1.5rem auto;
+  }
+
+  .lead {
+    font-family: $font-serif;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    color: #444;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+}
+
+.situacoes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+/* --- CARD (mesma linguagem dos cards de serviço) --- */
+.situacao-card {
+  background: $white;
+  padding: 2.25rem 2rem 2rem;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+  .icon-box {
+    margin-bottom: 1.25rem;
+    mat-icon {
+      font-size: 2.2rem; width: 2.2rem; height: 2.2rem;
+      color: $gold;
+      transition: all 0.4s ease;
+    }
+  }
+
+  /* A pergunta é o título: serifada, em caixa normal, para soar como conversa */
+  .pergunta {
+    font-family: $font-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: $navy;
+    margin: 0 0 0.9rem;
+    transition: color 0.4s ease;
+  }
+
+  .direito {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0 0 1.5rem;
+    flex: 1;
+    transition: color 0.4s ease;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    align-self: flex-start;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: $gold;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+
+    mat-icon { font-size: 1rem; width: 1rem; height: 1rem; transition: transform 0.3s ease; }
+    &:hover { border-bottom-color: currentColor; mat-icon { transform: translateX(4px); } }
+  }
+
+  .hover-line {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0%; height: 4px;
+    background: $gold;
+    transition: width 0.4s ease;
+  }
+
+  &:hover {
+    transform: translateY(-6px);
+    background: $navy;
+    border-color: $navy;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.3);
+
+    .icon-box mat-icon { color: $white; }
+    .pergunta { color: $white; }
+    .direito { color: rgba(255,255,255,0.8); }
+    .hover-line { width: 100%; }
+  }
+}
+
+.aviso {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #777;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .situacoes-section { padding: 5rem 1.25rem; }
+  .section-header .title { font-size: 2rem; }
+  .section-header .lead { font-size: 1.15rem; }
+  .situacoes-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .situacao-card .pergunta { font-size: 1.35rem; }
+}
