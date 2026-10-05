@@ -47,71 +47,22 @@ $font-body: 'Montserrat', sans-serif;
   }
 }
 
-/* --- LINHA DO PERFIL (ZIG-ZAG) --- */
+/* --- LINHA DO PERFIL --- */
 .profile-row {
   display: flex;
   align-items: center;
   gap: 5rem;
-  margin-bottom: 6rem; /* Espaço entre um advogado e outro */
+  margin-bottom: 4rem; /* Espaço entre um advogado e outro */
 
   &:last-child { margin-bottom: 0; }
-
-  /* Inverte a ordem para o segundo advogado */
-  &.reverse {
-    flex-direction: row-reverse;
-  }
-
-  /* --- COLUNA DA FOTO --- */
-  .image-col {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-
-    .photo-frame {
-      position: relative;
-      width: 350px;
-      height: 450px;
-
-      /* A Foto */
-      .photo {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background-size: cover;
-        background-position: top center;
-        z-index: 2;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        /* Filtro sutil para deixar elegante */
-        filter: grayscale(20%) contrast(1.1);
-        transition: all 0.5s ease;
-      }
-
-      /* A Moldura Dourada (Atrás) */
-      .frame-border {
-        position: absolute;
-        top: 20px; left: 20px; /* Deslocado para baixo e direita */
-        width: 100%; height: 100%;
-        border: 2px solid $gold;
-        z-index: 1;
-        transition: all 0.5s ease;
-      }
-
-      /* Efeito Hover na Foto */
-      &:hover {
-        .photo { transform: translate(-5px, -5px); filter: grayscale(0%); }
-        .frame-border { transform: translate(5px, 5px); }
-      }
-    }
-  }
-
-  /* Definição das Imagens */
-  .img-larissa { background-image: url('/larissa.webp'); }
-  .img-abelardo { background-image: url('/abelardo.webp'); }
 
 
   /* --- COLUNA DO TEXTO --- */
   .text-col {
     flex: 1;
+    /* Sem a coluna da foto, limita a medida da linha para manter a leitura confortável. */
+    max-width: 760px;
+    margin: 0 auto;
 
     .name-badge {
       border-left: 3px solid $gold;
@@ -199,15 +150,5 @@ $font-body: 'Montserrat', sans-serif;
 
     .highlights li { justify-content: center; }
 
-    /* Ajuste da moldura no mobile */
-    .image-col .photo-frame {
-      width: 280px;
-      height: 380px;
-      margin: 0 auto; /* Centraliza */
-
-      .frame-border {
-        top: 15px; left: 15px;
-      }
-    }
   }
 }

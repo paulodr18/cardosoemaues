@@ -3,9 +3,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 <section class="hero-section" id="inicio">
-  <video class="background-video" autoplay muted loop playsinline poster="/assets/video/video-poster.jpg">
-    <source src="video/video.mp4" type="video/mp4">
-  </video>
+  <!--
+    Imagem de fundo em alta resolução: o navegador escolhe a versão pela largura
+    da tela (srcset). Os arquivos são gerados por scripts/gerar-hero-bg.py a
+    partir de uma foto original; se ainda não existirem, o hero cai no fundo em
+    gradiente definido no SCSS em vez de exibir um ícone de imagem quebrada.
+  -->
+  <img
+    *ngIf="!imagemIndisponivel()"
+    class="background-image"
+    src="/hero/hero-2560.webp"
+    srcset="/hero/hero-1920.webp 1920w, /hero/hero-2560.webp 2560w, /hero/hero-3840.webp 3840w"
+    sizes="100vw"
+    alt=""
+    fetchpriority="high"
+    decoding="async"
+    (error)="imagemIndisponivel.set(true)"
+  >
   <!-- Overlay mais escuro para garantir que a letra fina apareça -->
   <div class="overlay"></div>
   <div class="hero-content">
@@ -20,9 +34,15 @@
 
   <p class="subtitle">Advocacia & Consultoria Jurídica</p>
 
+  <!-- Chamada orientada à dor do cliente (direção da cliente / landing page) -->
+  <p class="hero-lead">
+    Sem conseguir trabalhar, com um benefício negado pelo INSS ou demitido sem receber o que devia?
+    Você pode ter direitos que ainda não conhece.
+  </p>
+
   <!-- Botão "Fantasma" (Borda fina), muito mais discreto -->
-  <a href="https://wa.me/seunumerodewhatsapp" class="btn-outline">
-    Agende sua Consulta
+  <a href="#situacoes" class="btn-outline">
+    Ver se tenho direito
   </a>
 </div>
 
@@ -31,7 +51,6 @@
   <div class="social-simple">
     <a href="https://www.instagram.com/adv.larissamaues?igsh=MWxpeXlvZG0zemVmYQ==" class="social-link instagram" target="_blank" rel="noopener"></a>
     <a href="https://www.facebook.com/share/1EHFu2BhYn/?mibextid=wwXIfr" class="social-link facebook" target="_blank" rel="noopener"></a>
-    <a href="#" class="social-link linkedin" target="_blank" rel="noopener"></a>
  <!--   <a href="#" class="social-link whatsapp" target="_blank" rel="noopener"></a> -->
   </div>
 </aside>

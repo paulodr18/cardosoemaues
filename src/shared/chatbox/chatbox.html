@@ -2,7 +2,7 @@
 <div class="chat-widget">
 
   <!-- 1. BOTÃO FLUTUANTE (Aparece quando fechado) -->
-  <div class="chat-invite" *ngIf="!isOpen" (click)="toggleChat()">
+  <div class="chat-invite" *ngIf="!isOpen()" (click)="toggleChat()">
 
     <!-- Balão de Texto (Tooltip elegante) -->
     <div class="speech-bubble">
@@ -20,7 +20,7 @@
   </div>
 
   <!-- 2. JANELA DO CHAT (Aparece quando aberto) -->
-  <div class="chat-window" [class.open]="isOpen">
+  <div class="chat-window" [class.open]="isOpen()">
 
     <!-- Cabeçalho Premium -->
     <div class="chat-header">
@@ -29,31 +29,120 @@
           <img src="/chatbot.webp" alt="Avatar">
         </div>
         <div class="header-text">
-          <h3>Cardoso & Maués</h3>
+          <h3>Cardoso &amp; Maués</h3>
           <div class="status-indicator">
             <span class="dot"></span>
             <span class="text">Online Agora</span>
           </div>
         </div>
       </div>
-      <button class="close-btn" (click)="toggleChat()">
+      <button class="close-btn" (click)="toggleChat()" aria-label="Fechar chat">
         <mat-icon>close</mat-icon>
       </button>
     </div>
 
     <!-- Área de Mensagens -->
-    <div class="messages-area" #messagesContainer>
+    <div class="messages-area" #messagesContainer aria-live="polite">
       <div class="date-divider"><span>Hoje</span></div>
 
-      <div *ngFor="let msg of messages"
+      <div *ngFor="let msg of messages()"
            class="message-row"
            [ngClass]="msg.sender">
 
-        <div class="bubble">
-          <p [innerHTML]="msg.text"></p>
+        <!-- Mensagem de texto -->
+        <div class="bubble" *ngIf="msg.kind === 'text'">
+          <p class="msg-text">{{ msg.text }}</p>
+          <span class="time">{{ msg.time }}</span>
+        </div>
+
+        <!-- Resultado da consulta de processo -->
+        <div class="bubble processo-bubble" *ngIf="msg.kind === 'processos'">
+          <div class="processo-card" *ngFor="let proc of msg.processos">
+            <div class="processo-header">
+              <mat-icon>gavel</mat-icon>
+              <div>
+                <strong>{{ formatarNumero(proc.numeroProcesso) }}</strong>
+                <small *ngIf="proc.tribunal || proc.grau">{{ proc.tribunal }}<ng-container *ngIf="proc.grau"> · {{ proc.grau }}</ng-container></small>
+              </div>
+            </div>
+
+            <div class="processo-info">
+              <div class="info-row" *ngIf="proc.classe">
+                <span class="label">Classe</span>
+                <span class="value">{{ proc.classe }}</span>
+              </div>
+              <div class="info-row" *ngIf="proc.orgaoJulgador">
+                <span class="label">Órgão julgador</span>
+                <span class="value">{{ proc.orgaoJulgador }}</span>
+              </div>
+              <div class="info-row" *ngIf="proc.dataAjuizamento">
+                <span class="label">Ajuizamento</span>
+                <span class="value">{{ formatarData(proc.dataAjuizamento) }}</span>
+              </div>
+              <div class="info-row" *ngIf="nomesAssuntos(proc)">
+                <span class="label">Assuntos</span>
+                <span class="value">{{ nomesAssuntos(proc) }}</span>
+              </div>
+            </div>
+
+            <!-- Última movimentação (CNJ) -->
+            <div class="movimentacao" *ngIf="proc.ultimaMovimentacao as mov">
+              <div class="mov-title">
+                <mat-icon>update</mat-icon>
+                <span>Última movimentação</span>
+              </div>
+              <p class="mov-nome">{{ mov.nome }}</p>
+              <p class="mov-data">{{ formatarData(mov.dataHora, true) }}</p>
+              <p class="mov-significado" *ngIf="mov.descricaoSignificado">
+                {{ mov.descricaoSignificado }}
+              </p>
+            </div>
+
+            <!-- Movimentação registrada pelo escritório -->
+            <div class="movimentacao escritorio" *ngIf="proc.ultimaMovimentacaoBanco as movBanco">
+              <div class="mov-title">
+                <mat-icon>account_balance</mat-icon>
+                <span>Registro do escritório</span>
+              </div>
+              <p class="mov-nome">{{ movBanco.descricao }}</p>
+              <p class="mov-data">{{ formatarData(movBanco.dataHora, true) }}</p>
+              <p class="mov-significado" *ngIf="movBanco.descricaoSignificado">
+                {{ movBanco.descricaoSignificado }}
+              </p>
+              <div class="sync-badge" [class.ok]="proc.movimentacaoSincronizada">
+                <mat-icon>{{ proc.movimentacaoSincronizada ? 'check_circle' : 'schedule' }}</mat-icon>
+                <span>{{ proc.movimentacaoSincronizada ? 'Acompanhamento em dia' : 'Atualização em processamento' }}</span>
+              </div>
+            </div>
+          </div>
+          <span class="time">{{ msg.time }}</span>
+        </div>
+
+        <!-- Handoff para WhatsApp -->
+        <div class="bubble" *ngIf="msg.kind === 'whatsapp'">
+          <a class="whatsapp-btn" [href]="msg.whatsappUrl" target="_blank" rel="noopener">
+            <mat-icon>chat</mat-icon>
+            <span>Abrir WhatsApp</span>
+          </a>
           <span class="time">{{ msg.time }}</span>
         </div>
       </div>
+
+      <!-- Indicador "digitando..." -->
+      <div class="message-row bot" *ngIf="isTyping()">
+        <div class="bubble typing">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick replies -->
+    <div class="quick-replies" *ngIf="quickReplies().length > 0 && !isTyping()">
+      <button *ngFor="let reply of quickReplies()"
+              class="quick-reply-chip"
+              (click)="onQuickReply(reply)">
+        {{ reply.label }}
+      </button>
     </div>
 
     <!-- Área de Input -->
@@ -63,8 +152,9 @@
         [(ngModel)]="newMessage"
         (keydown.enter)="sendMessage()"
         placeholder="Digite sua mensagem..."
+        aria-label="Mensagem"
       >
-      <button class="send-btn" (click)="sendMessage()" [disabled]="!newMessage.trim()">
+      <button class="send-btn" (click)="sendMessage()" [disabled]="!newMessage.trim() || isTyping()" aria-label="Enviar mensagem">
         <mat-icon>send</mat-icon>
       </button>
     </div>

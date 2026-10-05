@@ -1,5 +1,5 @@
-import { Component} from '@angular/core';
-import { CommonModule} from '@angular/common';
+import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-hero-section',
@@ -9,12 +9,9 @@ import { CommonModule} from '@angular/common';
   styleUrls: ['./hero-section.scss']
 })
 export class HeroSectionComponent {
-
-  // Variável para controlar o fade do poster
-  isVideoLoaded = false;
-
-  // Chamado automaticamente quando o vídeo tem dados suficientes para tocar
-  onVideoLoad() {
-    this.isVideoLoaded = true;
-  }
+  /**
+   * Liga quando a imagem de fundo não carrega (arquivos em /hero ainda não
+   * gerados, ou falha de rede): o hero passa a usar o gradiente do SCSS.
+   */
+  readonly imagemIndisponivel = signal(false);
 }
