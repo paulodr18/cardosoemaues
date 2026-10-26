@@ -277,8 +277,8 @@ export class ChatboxComponent {
         if (!processos || processos.length === 0) {
           this.state = 'aguardando_numero';
           this.addBotText(
-            `Não encontrei o processo ${this.processoService.formatarNumeroProcesso(numero)} na base pública do CNJ (DataJud). ` +
-            'Verifique se o número está correto — processos em segredo de justiça ou muito recentes podem não constar na base. ' +
+            `O processo ${this.processoService.formatarNumeroProcesso(numero)} é inexistente ou ainda não foi incluído no sistema. ` +
+            'Verifique se o número está correto — processos muito recentes ou em segredo de justiça podem não constar nas bases. ' +
             'Quer tentar outro número?'
           );
           this.quickReplies.set([
