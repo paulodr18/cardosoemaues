@@ -1,15 +1,5 @@
-/* ================================
-   Variáveis de Estilo
-================================ */
-$font-serif: 'Cormorant Garamond', serif;
-$font-sans: 'Montserrat', sans-serif;
+/* Hero — tokens em src/styles.scss (design-system/cardoso-e-maues/MASTER.md) */
 
-$color-gold: #c5a059;
-$color-white: #fdfdfd; /* Branco levemente off */
-
-/* ================================
-   Hero Section
-================================ */
 .hero-section {
   position: relative;
   width: 100%;
@@ -20,15 +10,9 @@ $color-white: #fdfdfd; /* Branco levemente off */
   align-items: center;
   overflow: hidden;
 
-  /*
-   * Fundo de reserva (também é o que aparece enquanto a imagem carrega):
-   * navy profundo com brilho dourado discreto, na identidade do site.
-   */
-  background:
-    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(197, 160, 89, 0.18), transparent 70%),
-    linear-gradient(160deg, #1e293b 0%, #0f172a 55%, #0a0f1c 100%);
+  /* Degradê suave em navy, sem brilho dourado (a imagem em /hero, se existir, fica por cima) */
+  background: linear-gradient(160deg, var(--color-navy-light) 0%, var(--color-navy) 55%, var(--color-navy-deep) 100%);
 
-  /* Imagem de fundo (cobre toda a área, foco levemente acima do centro) */
   .background-image {
     position: absolute;
     inset: 0;
@@ -40,180 +24,129 @@ $color-white: #fdfdfd; /* Branco levemente off */
     filter: brightness(0.6) contrast(1.08) saturate(0.9);
   }
 
-  /* Overlay */
   .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(15, 23, 30, 0.4);
+    background: var(--color-navy-overlay);
     z-index: -2;
   }
 
-  /* Conteúdo */
   .hero-content {
     position: relative;
     z-index: 2;
     text-align: center;
     width: 100%;
     max-width: 900px;
-    padding: 0 20px;
-    animation: fadeIn 2s ease;
+    padding: 0 1.25rem;
+    animation: hero-fade-in 1.2s var(--ease-standard) both;
 
-    .hero-text {
-      h1 {
-        font-family: $font-serif;
-        font-size: 4.5rem;
+    /* Nome do escritório: única exceção à tipografia Lora/Inter (ver MASTER §3) */
+    h1 {
+      font-family: var(--font-brand);
+      font-size: var(--text-brand);
+      font-weight: 400;
+      color: var(--color-white);
+      margin: 0;
+      line-height: 1.1;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+
+      .ampersand {
+        font-family: var(--font-display);
+        font-style: italic;
         font-weight: 400;
-        color: $color-white;
-        margin: 0;
-        line-height: 1.1;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-
-        .ampersand {
-          font-family: serif;
-          font-style: italic;
-          color: $color-gold;
-          font-weight: 300;
-          font-size: 4rem;
-          margin: 0 10px;
-        }
-      }
-
-      /* Divider */
-      .divider {
-        width: 60px;
-        height: 1px;
-        background-color: $color-gold;
-        margin: 2rem auto;
-        opacity: 0.8;
-      }
-
-      /* Subtitle */
-      .subtitle {
-        font-family: $font-sans;
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 0.95rem;
-        text-transform: uppercase;
-        letter-spacing: 4px;
-        font-weight: 300;
-        margin-bottom: 3rem;
-      }
-
-      /* Chamada orientada à dor: serifada, em caixa normal, contraste com o subtítulo */
-      .hero-lead {
-        font-family: $font-serif;
-        font-size: 1.6rem;
-        font-weight: 400;
-        line-height: 1.4;
-        color: rgba(255, 255, 255, 0.95);
-        max-width: 720px;
-        margin: -1.5rem auto 2.5rem;
-      }
-
-      /* Botão Outline */
-      .btn-outline {
-        display: inline-block;
-        padding: 0.9rem 2.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        color: $color-white;
-        font-family: $font-sans;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        text-decoration: none;
-        transition: all 0.5s ease;
-        background: transparent;
-
-        &:hover {
-          border-color: $color-gold;
-          color: $color-gold;
-          background: rgba(0, 0, 0, 0.2);
-        }
+        color: var(--color-gold);
+        font-size: 0.9em;
+        margin: 0 0.15em;
       }
     }
 
-    /* Redes Sociais */
+    .divider {
+      width: 60px;
+      height: 1px;
+      background-color: var(--color-gold);
+      margin: var(--space-md) auto;
+      opacity: 0.8;
+    }
+
+    .subtitle {
+      font-family: var(--font-body);
+      color: var(--color-white-70);
+      font-size: var(--text-eyebrow);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    /* Chamada orientada à dor: serifada, caixa normal */
+    .hero-lead {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.4vw, 1.15rem); /* um degrau abaixo do --text-lead, a pedido da cliente */
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--color-white);
+      max-width: var(--container-narrow);
+      margin: 0 auto var(--space-md);
+    }
+
     .social-media {
-      margin-top: 5rem;
+      margin-top: var(--space-lg);
       display: flex;
       justify-content: center;
 
       .social-simple {
         display: flex;
-        gap: 2rem;
+        gap: var(--space-md);
+      }
 
-        .social-link {
-          width: 24px;
-          height: 24px;
-          background-color: rgba(255, 255, 255, 0.7);
-          mask-size: contain;
-          mask-repeat: no-repeat;
-          mask-position: center;
-          -webkit-mask-size: contain;
-          -webkit-mask-repeat: no-repeat;
-          -webkit-mask-position: center;
-          transition: all 0.3s;
-          cursor: pointer;
+      .social-link {
+        width: 24px;
+        height: 24px;
+        background-color: var(--color-white-70);
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        -webkit-mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        transition:
+          background-color var(--duration-fast) var(--ease-standard),
+          transform var(--duration-fast) var(--ease-standard);
+        cursor: pointer;
 
-          &:hover {
-            background-color: $color-gold;
-            transform: translateY(-3px);
-          }
+        &:hover {
+          background-color: var(--color-gold);
+          transform: translateY(-3px);
         }
+      }
 
-        .instagram {
-          -webkit-mask-image: url('/midias-sociais/instagram.png');
-          mask-image: url('/midias-sociais/instagram.png');
-        }
-        .facebook {
-          -webkit-mask-image: url('/midias-sociais/facebook.png');
-          mask-image: url('/midias-sociais/facebook.png');
-        }
-        .whatsapp {
-          -webkit-mask-image: url('/midias-sociais/whatsapp.png');
-          mask-image: url('/midias-sociais/whatsapp.png');
-        }
+      .instagram {
+        -webkit-mask-image: url('/midias-sociais/instagram.png');
+        mask-image: url('/midias-sociais/instagram.png');
+      }
+      .facebook {
+        -webkit-mask-image: url('/midias-sociais/facebook.png');
+        mask-image: url('/midias-sociais/facebook.png');
+      }
+      .whatsapp {
+        -webkit-mask-image: url('/midias-sociais/whatsapp.png');
+        mask-image: url('/midias-sociais/whatsapp.png');
       }
     }
   }
 }
 
-/* ================================
-   Responsividade
-================================ */
 @media (max-width: 768px) {
-  .hero-section .hero-content .hero-text {
-    h1 {
-      font-size: 2.8rem;
-      letter-spacing: 1px;
-    }
-
-    .subtitle {
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-    }
-
-    .hero-lead {
-      font-size: 1.2rem;
-      margin: -1rem auto 2rem;
-    }
-
-    .divider {
-      margin: 1.5rem auto;
-    }
+  .hero-section .hero-content {
+    h1 { letter-spacing: 1px; }
+    .subtitle { letter-spacing: var(--tracking-md); }
+    .divider { margin: var(--space-sm) auto; }
+    .social-media { margin-top: var(--space-md); }
   }
 }
 
-/* ================================
-   Animação
-================================ */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes hero-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

@@ -1,87 +1,68 @@
-/* Variáveis */
-$gold: #c5a059;
-$dark: #0f172a;
-$font-serif: 'Cinzel', serif;
-$font-sans: 'Montserrat', sans-serif;
+/* Modal de parceria — tokens em src/styles.scss (design-system/cardoso-e-maues/MASTER.md) */
 
 .modal-container {
   padding: 1.5rem;
-  color: $dark;
-  font-family: $font-sans;
-  background: #fff;
+  color: var(--color-navy);
+  font-family: var(--font-body);
+  background: var(--color-white);
   position: relative;
-  /* Scroll se a tela for pequena */
   max-height: 90vh;
   overflow-y: auto;
 }
 
 .modal-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-md);
   position: relative;
 
   h2 {
-    font-family: $font-serif;
+    font-family: var(--font-title);
     font-size: 1.8rem;
-    font-weight: 700;
+    font-weight: 600;
     margin: 0;
-    color: $dark;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    color: var(--color-navy);
 
     .ampersand {
-      color: $gold;
+      color: var(--color-gold);
       font-weight: 400;
     }
 
     .gold-text {
-      color: $gold;
+      color: var(--color-gold);
       font-style: italic;
-      font-family: 'Playfair Display', serif;
-      text-transform: capitalize;
+      font-family: var(--font-display);
+      font-weight: 400;
     }
   }
 
   p {
     font-size: 0.95rem;
-    color: rgba(15, 23, 42, 0.7);
-    margin-top: 0.5rem;
+    color: var(--color-muted);
+    margin-top: var(--space-xs);
   }
 
   .close-btn {
     position: absolute;
     top: -20px;
     right: -10px;
-    color: #999;
-    
-    &:hover { color: $dark; }
+    color: var(--color-muted);
+    transition: color var(--duration-fast) var(--ease-standard);
+
+    &:hover { color: var(--color-navy); }
   }
 }
 
-/* Estilização de Layout */
-.full-width {
-  width: 100%;
-}
+.full-width { width: 100%; }
+.row { margin-bottom: 0.2rem; }
+.double-col { display: flex; gap: var(--space-sm); }
 
-.row {
-  margin-bottom: 0.2rem;
-}
-
-.double-col {
-  display: flex;
-  gap: 1rem;
-}
-
-/* --- OVERRIDES DO MATERIAL DESIGN (Para ficar Dourado) --- */
-
-/* Cor da borda padrão */
+/* Overrides do Material: borda e label dourados no foco */
 ::ng-deep .custom-field .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
 ::ng-deep .custom-field .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
 ::ng-deep .custom-field .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
-  border-color: rgba(15, 23, 42, 0.2);
+  border-color: var(--color-border);
 }
 
-/* Cor da borda quando FOCADO (Dourado) */
 ::ng-deep .custom-field
   .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
   .mdc-notched-outline__leading,
@@ -91,53 +72,87 @@ $font-sans: 'Montserrat', sans-serif;
 ::ng-deep .custom-field
   .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
   .mdc-notched-outline__trailing {
-  border-color: $gold !important;
+  border-color: var(--color-gold) !important;
   border-width: 2px;
 }
 
-/* Cor do Label quando flutua */
 ::ng-deep .custom-field .mdc-floating-label--float-above {
-  color: $gold !important;
+  color: var(--color-gold-text) !important;
   font-weight: 500;
 }
 
-/* Botões */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 1rem;
+  gap: var(--space-sm);
   margin-top: 1.5rem;
 
   .btn-cancel {
-    color: #64748b;
-    font-family: $font-sans;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-weight: 500;
   }
 
   .btn-submit {
-    background-color: $gold;
-    color: #fff;
-    font-family: $font-sans;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 0 2rem;
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+    font-family: var(--font-body);
+    font-weight: 500;
+    padding: 0 var(--space-md);
     height: 45px;
-    letter-spacing: 1px;
-    transition: 0.3s;
-    box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
+    letter-spacing: var(--tracking-sm);
+    border-radius: var(--radius-none);
+    box-shadow: none;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      box-shadow var(--duration-fast) var(--ease-standard);
 
     &:hover {
-      background-color: darken($gold, 10%);
-      box-shadow: 0 6px 15px rgba(197, 160, 89, 0.5);
+      background-color: var(--color-gold-light);
+      box-shadow: var(--shadow-gold);
     }
   }
 }
 
-/* Responsivo */
-@media (max-width: 600px) {
-  .modal-container { padding: 1rem; }
+/* Tela de sucesso */
+.success-message {
+  text-align: center;
+  padding: var(--space-md) var(--space-sm);
+
+  .icon-circle {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--space-sm);
+    border-radius: var(--radius-full);
+    border: 2px solid var(--color-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold);
+
+    mat-icon { font-size: 2rem; width: 2rem; height: 2rem; }
+  }
+
+  h3 {
+    font-family: var(--font-title);
+    color: var(--color-navy);
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  p { color: var(--color-muted); margin: 0 0 var(--space-xs); }
+  .sub-text { font-size: var(--text-small); margin-bottom: var(--space-md); }
+
+  .btn-close-success {
+    color: var(--color-navy);
+    border-color: var(--color-navy);
+    font-family: var(--font-body);
+    border-radius: var(--radius-none);
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-container { padding: var(--space-sm); }
   .double-col { flex-direction: column; gap: 0; }
   .modal-header h2 { font-size: 1.5rem; }
 }

@@ -1,104 +1,95 @@
-/* Variáveis (Identidade do Hero) */
-$gold: #c5a059;
-$white: #ffffff;
-$font-serif: 'Cormorant Garamond', serif; /* Fonte do Hero */
-$font-sans: 'Montserrat', sans-serif;
+/* Contato — tokens em src/styles.scss (design-system/cardoso-e-maues/MASTER.md) */
 
 .contact-section {
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center; /* Centraliza verticalmente */
+  align-items: center;
   justify-content: center;
-  padding: 120px 20px 80px;  /* Espaço para não colar nas bordas */
+  padding: calc(var(--navbar-height) + var(--space-lg)) 1.25rem var(--space-lg);
 
-  /* Imagem de Fundo Fixa (Parallax) */
   background: url('/time.webp') no-repeat center top;
   background-size: cover;
   background-attachment: fixed;
   overflow: hidden;
 
-  /* Overlay Degradê: Escuro nas laterais, leve no centro */
   .overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
       90deg,
-      rgba(15, 23, 42, 0.9) 0%,   /* Bem escuro na esquerda (texto) */
+      rgba(15, 23, 42, 0.9) 0%,
       rgba(15, 23, 42, 0.7) 50%,
-      rgba(15, 23, 42, 0.9) 100%  /* Bem escuro na direita (form) */
+      rgba(15, 23, 42, 0.9) 100%
     );
     z-index: 1;
   }
 
-  /* Legenda discreta sobre a foto, no canto inferior direito */
+  /* Legenda discreta sobre a foto */
   .foto-legenda {
     position: absolute;
-    right: 2rem;
+    right: var(--space-md);
     bottom: 1.5rem;
     z-index: 3;
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
     padding: 0.55rem 1rem 0.55rem 0.8rem;
-    border: 1px solid rgba(197, 160, 89, 0.55);
-    border-radius: 2px;
-    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid var(--color-gold);
+    border-radius: var(--radius-none);
+    background: var(--color-navy-overlay);
     backdrop-filter: blur(4px);
-    font-family: $font-sans;
+    font-family: var(--font-body);
     font-size: 0.72rem;
-    letter-spacing: 1.5px;
+    letter-spacing: var(--tracking-sm);
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--color-white);
 
-    mat-icon { color: $gold; font-size: 1.1rem; width: 1.1rem; height: 1.1rem; }
-    strong { color: $gold; font-weight: 600; margin-right: 0.4rem; }
+    mat-icon { color: var(--color-gold); font-size: 1.1rem; width: 1.1rem; height: 1.1rem; }
+    strong { color: var(--color-gold); font-weight: 600; margin-right: 0.4rem; }
   }
 
   .container {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1200px;
+    max-width: var(--container);
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Duas colunas iguais */
-    gap: 6rem; /* Espaço amplo entre texto e form */
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
     align-items: center;
   }
 
-  /* --- LADO ESQUERDO: TEXTO HERO --- */
   .info-side {
     .hero-title {
-      font-family: $font-serif;
-      font-size: 4rem; /* Tamanho Hero */
-      color: $white;
-      font-weight: 400;
-      line-height: 1.1;
+      font-family: var(--font-title);
+      font-size: var(--text-h1);
+      color: var(--color-white);
+      font-weight: 500;
+      line-height: 1.15;
       margin: 0;
-      text-transform: uppercase;
-      letter-spacing: 2px;
 
       .italic-gold {
-        color: $gold;
-        font-style: italic; /* Toque elegante do Hero */
-        font-family: $font-serif;
+        color: var(--color-gold);
+        font-style: italic;
+        font-weight: 400;
       }
     }
 
     .gold-line {
       width: 80px;
       height: 1px;
-      background: $gold;
-      margin: 2rem 0;
+      background: var(--color-gold);
+      margin: var(--space-md) 0;
     }
 
     .hero-subtitle {
-      font-family: $font-sans;
-      color: rgba(255, 255, 255, 0.85);
-      font-size: 1.1rem;
+      font-family: var(--font-body);
+      color: var(--color-white);
+      font-size: var(--text-lead);
       font-weight: 300;
-      line-height: 1.6;
-      margin-bottom: 3rem;
+      line-height: 1.55;
+      margin-bottom: var(--space-md);
       max-width: 90%;
     }
 
@@ -110,49 +101,48 @@ $font-sans: 'Montserrat', sans-serif;
       .contact-item {
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: var(--space-sm);
         color: inherit;
         text-decoration: none;
 
-        /* Rótulo discreto acima do número (geral / trabalhista) */
         small {
           display: block;
-          font-family: $font-sans;
+          font-family: var(--font-body);
           font-size: 0.7rem;
-          letter-spacing: 1.5px;
+          letter-spacing: var(--tracking-sm);
           text-transform: uppercase;
-          color: $gold;
+          color: var(--color-gold);
           margin-bottom: 2px;
         }
 
-        &[href]:hover span { color: $gold; }
+        &[href] { cursor: pointer; }
+        &[href]:hover span { color: var(--color-gold); }
 
         mat-icon {
-          color: $gold;
+          color: var(--color-gold);
           font-size: 1.8rem;
           width: 1.8rem;
           height: 1.8rem;
         }
 
         span {
-          font-family: $font-sans;
-          color: $white;
-          font-size: 1rem;
-          letter-spacing: 0.5px;
+          font-family: var(--font-body);
+          color: var(--color-white);
+          font-size: var(--text-body);
+          transition: color var(--duration-fast) var(--ease-standard);
         }
       }
     }
   }
 
-  /* --- LADO DIREITO: FORMULÁRIO FLUTUANTE --- */
+  /* Formulário "flutuante" sobre o fundo escuro: inputs só com linha inferior */
   .form-side {
-    /* Sem background, sem bordas. Apenas inputs flutuando. */
-    padding: 1rem;
+    padding: var(--space-sm);
 
     form {
       display: flex;
       flex-direction: column;
-      gap: 2.5rem; /* Espaçamento grande para elegância */
+      gap: 2.5rem;
     }
 
     .input-wrapper {
@@ -160,66 +150,52 @@ $font-sans: 'Montserrat', sans-serif;
 
       label {
         display: block;
-        font-family: $font-sans;
-        font-size: 0.75rem;
+        font-family: var(--font-body);
+        font-size: var(--text-eyebrow);
         text-transform: uppercase;
-        letter-spacing: 2px;
-        color: $gold;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
+        letter-spacing: var(--tracking-md);
+        color: var(--color-gold);
+        margin-bottom: var(--space-xs);
+        font-weight: 500;
       }
 
       input, textarea {
         width: 100%;
-        background: transparent; /* Fundo transparente */
+        background: transparent;
         border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Linha sutil */
+        border-bottom: 1px solid var(--color-white-40);
         padding: 10px 0;
-        color: $white;
-        font-family: $font-serif; /* Fonte Serifada no input fica muito chique */
-        font-size: 1.5rem; /* Input com letra grande */
+        color: var(--color-white);
+        font-family: var(--font-body);
+        font-size: 1.15rem;
+        font-weight: 400;
         outline: none;
-        transition: border-color 0.4s ease;
         resize: none;
+        transition: border-color var(--duration-slow) var(--ease-standard);
 
         &::placeholder {
-          color: rgba(255, 255, 255, 0.2);
-          font-family: $font-sans;
-          font-size: 1rem;
+          color: var(--color-white-40);
+          font-family: var(--font-body);
+          font-size: var(--text-body);
           font-weight: 300;
         }
 
-        &:focus {
-          border-bottom-color: $gold; /* Linha fica dourada no foco */
-        }
+        &:focus { border-bottom-color: var(--color-gold); }
+        &:focus-visible { outline: none; }
       }
     }
 
-    /* Botão Estilo Outline/Hero */
     .btn-hero {
-      margin-top: 1rem;
-      background: transparent;
-      border: 1px solid $gold;
-      color: $gold;
-      padding: 1rem 3rem;
-      font-family: $font-sans;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.4s ease;
+      margin-top: var(--space-sm);
       align-self: flex-start;
-
-      &:hover {
-        background: $gold;
-        color: #0f172a; /* Cor escura do texto no hover */
-        box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
-      }
+      padding: 1rem 2.5rem;
     }
   }
 
-  /* --- RESPONSIVIDADE --- */
   @media (max-width: 992px) {
+    height: auto;
+    min-height: auto;
+
     .foto-legenda {
       right: 50%;
       transform: translateX(50%);
@@ -227,35 +203,24 @@ $font-sans: 'Montserrat', sans-serif;
       white-space: nowrap;
     }
 
-    padding-top: 100px;
-    height: auto; /* Remove altura fixa no mobile */
-    min-height: auto;
-
     .container {
-      grid-template-columns: 1fr; /* Uma coluna */
-      gap: 4rem;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
     }
 
     .info-side {
       text-align: center;
 
-      .gold-line { margin: 2rem auto; }
-      .hero-subtitle { margin: 0 auto 3rem auto; }
-
-      .contact-list {
-        align-items: center; /* Centraliza itens */
-      }
-
-      .hero-title { font-size: 3rem; }
+      .gold-line { margin: var(--space-md) auto; }
+      .hero-subtitle { margin: 0 auto var(--space-md); max-width: 100%; }
+      .contact-list { align-items: center; }
     }
 
     .form-side {
-      padding-bottom: 3rem;
+      padding-bottom: var(--space-md);
 
       .input-wrapper input,
-      .input-wrapper textarea {
-        font-size: 1.2rem; /* Menor no mobile */
-      }
+      .input-wrapper textarea { font-size: 1.05rem; }
     }
   }
 }
