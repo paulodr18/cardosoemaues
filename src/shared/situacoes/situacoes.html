@@ -2,12 +2,11 @@
   <div class="container">
 
     <div class="section-header">
-      <span class="pre-title">Seus Direitos</span>
-      <h2 class="title">Você se identifica com alguma destas situações?</h2>
+      <span class="pre-title">Seus direitos</span>
+      <h2 class="title">Alguma destas situações é a sua?</h2>
       <div class="divider"></div>
       <p class="lead">
-        Muita gente passa por isso sem saber que a lei prevê uma proteção.
-        Veja se a sua situação está aqui — e fale com quem pode orientar.
+        Muita gente tem direitos que não conhece. Veja se a sua situação está aqui.
       </p>
     </div>
 
@@ -21,10 +20,21 @@
         </a>
         <div class="hover-line"></div>
       </article>
+
+      <!-- Card de fechamento: quem não se encontrou nos seis acima -->
+      <article class="situacao-card situacao-card--outras">
+        <div class="outras-texto">
+          <h3 class="pergunta">Não encontrou a sua situação?</h3>
+          <p class="direito">Também orientamos sobre {{ outrasSituacoes }}.</p>
+        </div>
+        <a class="btn btn--primary" [href]="linkWhatsappGeral" target="_blank" rel="noopener">
+          Conte sua situação
+        </a>
+      </article>
     </div>
 
     <p class="aviso">
-      Conteúdo informativo. Cada situação depende de análise individual dos documentos e do histórico.
+      Conteúdo informativo. Cada caso depende de análise individual.
     </p>
   </div>
 </section>
